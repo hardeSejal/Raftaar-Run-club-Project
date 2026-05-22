@@ -1,0 +1,335 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 4%;
+    --foreground: 0 0% 100%;
+    --card: 0 0% 8%;
+    --card-foreground: 0 0% 100%;
+    --popover: 0 0% 8%;
+    --popover-foreground: 0 0% 100%;
+    --primary: 17 100% 56%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 37 91% 43%;
+    --secondary-foreground: 0 0% 100%;
+    --muted: 240 5% 15%;
+    --muted-foreground: 240 5% 65%;
+    --accent: 17 100% 56%;
+    --accent-foreground: 0 0% 100%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 0 0% 100% / 0.08;
+    --input: 0 0% 100% / 0.08;
+    --ring: 17 100% 56%;
+    --radius: 0.5rem;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-[#0A0A0A] text-white antialiased;
+    font-family: 'Inter', sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Bebas Neue', sans-serif;
+  }
+}
+
+@layer components {
+  .font-display {
+    font-family: 'Bebas Neue', sans-serif;
+  }
+
+  .font-body {
+    font-family: 'Inter', sans-serif;
+  }
+
+  .font-mono {
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  .glass-card {
+  background: rgba(20, 20, 20, 0.7);
+  border: 1px solid rgba(255,255,255,0.08);
+  backdrop-filter: blur(10px);
+}
+
+  .section-label {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 13px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #0B7D7D;
+  font-weight: 600;
+}
+
+  .btn-primary {
+    background: #0B7D7D;
+    color: #FFFFFF;
+    border-radius: 4px;
+    padding: 14px 36px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    transition: all 0.3s ease;
+  }
+
+  .btn-primary:hover {
+    background: #D97706;
+  }
+
+  .btn-secondary {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: #FFFFFF;
+    border-radius: 4px;
+    padding: 14px 36px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    transition: all 0.3s ease;
+  }
+
+  .btn-secondary:hover {
+    border-color: #0B7D7D;
+    color: #0B7D7D;
+  }
+}
+
+/* 3D Perspective Text Flip Animation */
+.perspective-text {
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: clamp(72px, 12vw, 180px);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+  color: #FFFFFF;
+  text-align: center;
+  animation: textFlip 6s ease-in-out infinite;
+}
+
+.perspective-text:hover {
+  animation-play-state: paused;
+}
+
+.perspective-text:hover .perspective-line:nth-child(odd) p {
+  transform: translate3d(0, 0, 0) rotateX(0);
+}
+
+.perspective-text:hover .perspective-line:nth-child(even) p {
+  transform: translate3d(0, 0, 0) rotateX(0);
+}
+
+.perspective-line {
+  height: clamp(72px, 12vw, 180px);
+  overflow: hidden;
+  position: relative;
+}
+
+.perspective-line p {
+  height: clamp(72px, 12vw, 180px);
+  line-height: 0.9;
+  padding: 0 10px;
+  margin: 0;
+  transition: all 0.4s ease-in-out;
+  transform: translate3d(0, 0, 0);
+  white-space: nowrap;
+}
+
+.perspective-line:nth-child(odd) p {
+  transform-origin: top;
+}
+
+.perspective-line:nth-child(even) p {
+  transform-origin: bottom;
+}
+
+.perspective-line:nth-child(odd) p:first-child {
+  transform: translate3d(0, 0, 0) rotateX(0);
+}
+
+.perspective-line:nth-child(odd) p:last-child {
+  transform: translate3d(0, 0, 0) rotateX(-90deg);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+.perspective-line:nth-child(even) p:first-child {
+  transform: translate3d(0, 0, 0) rotateX(90deg);
+}
+
+.perspective-line:nth-child(even) p:last-child {
+  transform: translate3d(0, 0, 0) rotateX(0);
+}
+
+@keyframes textFlip {
+  0% {
+    /* Resting state */
+  }
+  45% {
+    /* Hold flipped */
+  }
+  50% {
+    /* Flip swap */
+  }
+  95% {
+    /* Hold swapped */
+  }
+  100% {
+    /* Return */
+  }
+}
+
+@keyframes textFlip {
+  0%, 40% {
+    /* Resting state - show original text */
+  }
+  45%, 55% {
+    /* Flip transition - CSS handles via animation */
+  }
+  60%, 100% {
+    /* Return */
+  }
+}
+
+/* Simpler auto-flip using keyframe transform toggles */
+@keyframes textFlipLine1 {
+  0%, 45% {
+    transform: translate3d(0, 0, 0) rotateX(0);
+  }
+  50%, 95% {
+    transform: translate3d(0, 0, 0) rotateX(-90deg);
+  }
+  100% {
+    transform: translate3d(0, 0, 0) rotateX(0);
+  }
+}
+
+@keyframes textFlipLine1b {
+  0%, 45% {
+    transform: translate3d(0, 0, 0) rotateX(90deg);
+  }
+  50%, 95% {
+    transform: translate3d(0, 0, 0) rotateX(0);
+  }
+  100% {
+    transform: translate3d(0, 0, 0) rotateX(90deg);
+  }
+}
+
+@keyframes textFlipLine2 {
+  0%, 45% {
+    transform: translate3d(0, 0, 0) rotateX(90deg);
+  }
+  50%, 95% {
+    transform: translate3d(0, 0, 0) rotateX(0);
+  }
+  100% {
+    transform: translate3d(0, 0, 0) rotateX(90deg);
+  }
+}
+
+@keyframes textFlipLine2b {
+  0%, 45% {
+    transform: translate3d(0, 0, 0) rotateX(0);
+  }
+  50%, 95% {
+    transform: translate3d(0, 0, 0) rotateX(-90deg);
+  }
+  100% {
+    transform: translate3d(0, 0, 0) rotateX(0);
+  }
+}
+
+.perspective-line:nth-child(1) p:first-child {
+  animation: textFlipLine1 6s ease-in-out infinite;
+}
+
+.perspective-line:nth-child(1) p:last-child {
+  animation: textFlipLine1b 6s ease-in-out infinite;
+}
+
+.perspective-line:nth-child(2) p:first-child {
+  animation: textFlipLine2 6s ease-in-out infinite;
+}
+
+.perspective-line:nth-child(2) p:last-child {
+  animation: textFlipLine2b 6s ease-in-out infinite;
+}
+
+/* Floating glow orbs */
+@keyframes floatGlow1 {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(20px, 30px);
+  }
+}
+
+@keyframes floatGlow2 {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(-15px, -25px);
+  }
+}
+
+.float-glow-1 {
+  animation: floatGlow1 8s ease-in-out infinite alternate;
+}
+
+.float-glow-2 {
+  animation: floatGlow2 8s ease-in-out infinite alternate;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0A0A0A;
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.25);
+}
+
+/* Lenis */
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+  pointer-events: none;
+}
